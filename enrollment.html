@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Application - King Solomon Junior Primary School</title>
+    <meta name="description" content="Apply online to King Solomon Junior Primary School. Complete application form for admission to our quality education institution in Homa Bay, Kenya.">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Source+Serif+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    
+    <style>
+        /* Enrollment Form Specific Styles */
+        .enrollment-page {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+        
+        .enrollment-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .enrollment-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('gallery/badge.jpeg') center/contain no-repeat;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .enrollment-header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .school-logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .school-badge {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .school-details h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .school-details p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        
+        .school-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .info-item {
+            text-align: center;
+        }
+        
+        .info-item i {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .enrollment-form-container {
+            max-width: 1000px;
+            margin: -2rem auto 0;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .form-progress {
+            background: #f8fafc;
+            padding: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            background: #e2e8f0;
+            color: #64748b;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-step.active {
+            background: #3b82f6;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .progress-step.completed {
+            background: #10b981;
+            color: white;
+        }
+        
+        .progress-step-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: currentColor;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .progress-line {
+            height: 2px;
+            background: #e2e8f0;
+            flex: 1;
+            margin: 0 1rem;
+        }
+        
+        .form-content {
+            padding: 3rem;
+        }
+        
+        .form-step {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .step-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .step-header h2 {
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-header p {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .required {
+            color: #ef4444;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.875rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+        
+        .field-error {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        .file-upload-area {
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+        }
+        
+        .file-upload-area:hover,
+        .file-upload-area.drag-over {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+        
+        .file-upload-icon {
+            font-size: 2rem;
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+        
+        .file-preview {
+            margin-top: 1rem;
+        }
+        
+        .file-preview-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem;
+            background: #f3f4f6;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .preview-image {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .remove-file-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+        
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .btn {
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .review-section {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .review-section h3 {
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+        
+        .review-section p {
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+        
+        /* Success Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+        
+        .modal h2 {
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+        
+        .modal p {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+        
+        .application-ref {
+            background: #f3f4f6;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin: 1rem 0;
+        }
+        
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 1001;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification-success {
+            background: #10b981;
+        }
+        
+        .notification-error {
+            background: #ef4444;
+        }
+        
+        .notification-info {
+            background: #3b82f6;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .enrollment-header {
+                padding: 2rem 0;
+            }
+            
+            .school-details h1 {
+                font-size: 2rem;
+            }
+            
+            .school-info {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .enrollment-form-container {
+                margin: -1rem 1rem 0;
+                border-radius: 15px;
+            }
+            
+            .form-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .progress-steps {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .progress-line {
+                display: none;
+            }
+            
+            .form-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body class="enrollment-page">
+    <!-- Background Slideshow -->
+    <div class="background-slideshow">
+        <div class="bg-slide active" style="background-image: url('gallery/students/10.jpeg');"></div>
+        <div class="bg-slide" style="background-image: url('gallery/students/23.jpeg');"></div>
+        <div class="bg-slide" style="background-image: url('gallery/students/3.jpeg');"></div>
+        <div class="bg-slide" style="background-image: url('gallery/students/58.jpeg');"></div>
+        <div class="bg-slide" style="background-image: url('gallery/students/7.jpeg');"></div>
+        <div class="bg-slide" style="background-image: url('gallery/1.jpeg');"></div>
+        <div class="bg-slide" style="background-image: url('gallery/2.jpeg');"></div>
+        <div class="bg-slide" style="background-image: url('gallery/5.jpeg');"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="gallery/badge.jpeg" alt="School Badge" class="badge">
+                <span class="school-name">King Solomon Junior</span>
+            </a>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="academics.html" class="nav-link">Academics</a>
+                <a href="admissions.html" class="nav-link">Admissions</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Enrollment Header with School Details -->
+    <section class="enrollment-header">
+        <div class="container">
+            <div class="enrollment-header-content">
+                <div class="school-logo-section">
+                    <img src="gallery/badge.jpeg" alt="School Badge" class="school-badge">
+                    <div class="school-details">
+                        <h1>King Solomon Junior Primary School</h1>
+                        <p>Online Application Form</p>
+                        <p>Quality Education in Homa Bay, Kenya</p>
+                    </div>
+                </div>
+                
+                <div class="school-info">
+                    <div class="info-item">
+                        <i>📍</i>
+                        <strong>Location</strong>
+                        <p>Koginga Road, Asego<br>Homa Bay County</p>
+                    </div>
+                    <div class="info-item">
+                        <i>📞</i>
+                        <strong>Contact</strong>
+                        <p>+254 720 456 789<br>info@kingsolomonjunior.ac.ke</p>
+                    </div>
+                    <div class="info-item">
+                        <i>🎓</i>
+                        <strong>Education Level</strong>
+                        <p>Pre-Primary to Grade 6<br>CBC Curriculum</p>
+                    </div>
+                    <div class="info-item">
+                        <i>⏰</i>
+                        <strong>Application Period</strong>
+                        <p>Year-Round Admissions<br>Quick Processing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enrollment Form -->
+    <div class="enrollment-form-container">
+        <div class="form-progress">
+            <div class="progress-steps">
+                <div class="progress-step active" data-step="1">
+                    <div class="progress-step-number">1</div>
+                    <span>Student Information</span>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="2">
+                    <div class="progress-step-number">2</div>
+                    <span>Parent/Guardian Details</span>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="3">
+                    <div class="progress-step-number">3</div>
+                    <span>Required Documents</span>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="4">
+                    <div class="progress-step-number">4</div>
+                    <span>Review & Submit</span>
+                </div>
+            </div>
+        </div>
+
+        <form id="enrollmentForm" class="form-content">
+            <!-- Step 1: Student Information -->
+            <div class="form-step active" data-step="1">
+                <div class="step-header">
+                    <h2>Student Information</h2>
+                    <p>Please provide details about the student applying for admission</p>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="studentFirstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="studentFirstName" name="studentFirstName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="studentMiddleName">Middle Name</label>
+                        <input type="text" id="studentMiddleName" name="studentMiddleName">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="studentLastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="studentLastName" name="studentLastName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dateOfBirth">Date of Birth <span class="required">*</span></label>
+                        <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gender">Gender <span class="required">*</span></label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="applyingFor">Applying for Grade <span class="required">*</span></label>
+                        <select id="applyingFor" name="applyingFor" required>
+                            <option value="">Select Grade</option>
+                            <option value="Pre-Primary 1">Pre-Primary 1 (Age 3-4)</option>
+                            <option value="Pre-Primary 2">Pre-Primary 2 (Age 4-5)</option>
+                            <option value="Grade 1">Grade 1 (Age 5-6)</option>
+                            <option value="Grade 2">Grade 2 (Age 6-7)</option>
+                            <option value="Grade 3">Grade 3 (Age 7-8)</option>
+                            <option value="Grade 4">Grade 4 (Age 8-9)</option>
+                            <option value="Grade 5">Grade 5 (Age 9-10)</option>
+                            <option value="Grade 6">Grade 6 (Age 10-11)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="previousSchool">Previous School (if any)</label>
+                        <input type="text" id="previousSchool" name="previousSchool">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastGrade">Last Grade Completed</label>
+                        <input type="text" id="lastGrade" name="lastGrade">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="medicalConditions">Medical Conditions (if any)</label>
+                        <textarea id="medicalConditions" name="medicalConditions" rows="3" placeholder="Please describe any medical conditions or special needs..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Parent/Guardian Information -->
+            <div class="form-step" data-step="2">
+                <div class="step-header">
+                    <h2>Parent/Guardian Information</h2>
+                    <p>Please provide contact details for the primary parent or guardian</p>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="parentFirstName">Parent/Guardian First Name <span class="required">*</span></label>
+                        <input type="text" id="parentFirstName" name="parentFirstName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="parentLastName">Parent/Guardian Last Name <span class="required">*</span></label>
+                        <input type="text" id="parentLastName" name="parentLastName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="parentRelationship">Relationship to Student <span class="required">*</span></label>
+                        <select id="parentRelationship" name="parentRelationship" required>
+                            <option value="">Select Relationship</option>
+                            <option value="Father">Father</option>
+                            <option value="Mother">Mother</option>
+                            <option value="Guardian">Guardian</option>
+                            <option value="Grandparent">Grandparent</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="parentPhone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="parentPhone" name="parentPhone" placeholder="+254 700 000 000" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="parentEmail">Email Address <span class="required">*</span></label>
+                        <input type="email" id="parentEmail" name="parentEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="parentOccupation">Occupation</label>
+                        <input type="text" id="parentOccupation" name="parentOccupation">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Home Address <span class="required">*</span></label>
+                        <textarea id="address" name="address" rows="3" required placeholder="Please provide your complete home address..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="secondaryContactName">Secondary Contact Name</label>
+                        <input type="text" id="secondaryContactName" name="secondaryContactName">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="secondaryContactPhone">Secondary Contact Phone</label>
+                        <input type="tel" id="secondaryContactPhone" name="secondaryContactPhone">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Required Documents -->
+            <div class="form-step" data-step="3">
+                <div class="step-header">
+                    <h2>Required Documents</h2>
+                    <p>Please upload the following documents (PDF, JPG, or PNG format, max 5MB each)</p>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="birthCertificate">Birth Certificate <span class="required">*</span></label>
+                        <div class="file-upload-area" onclick="document.getElementById('birthCertificate').click()">
+                            <div class="file-upload-icon">📄</div>
+                            <p>Click to upload or drag and drop</p>
+                            <p><small>PDF, JPG, PNG (max 5MB)</small></p>
+                        </div>
+                        <input type="file" id="birthCertificate" name="birthCertificate" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" required>
+                        <div id="birthCertificatePreview" class="file-preview"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="passportPhoto">Passport Photo <span class="required">*</span></label>
+                        <div class="file-upload-area" onclick="document.getElementById('passportPhoto').click()">
+                            <div class="file-upload-icon">📷</div>
+                            <p>Click to upload or drag and drop</p>
+                            <p><small>JPG, PNG (max 5MB)</small></p>
+                        </div>
+                        <input type="file" id="passportPhoto" name="passportPhoto" accept=".jpg,.jpeg,.png" style="display: none;" required>
+                        <div id="passportPhotoPreview" class="file-preview"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="previousReport">Previous School Report (if applicable)</label>
+                        <div class="file-upload-area" onclick="document.getElementById('previousReport').click()">
+                            <div class="file-upload-icon">📊</div>
+                            <p>Click to upload or drag and drop</p>
+                            <p><small>PDF, JPG, PNG (max 5MB)</small></p>
+                        </div>
+                        <input type="file" id="previousReport" name="previousReport" accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
+                        <div id="previousReportPreview" class="file-preview"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="medicalCertificate">Medical Certificate (if applicable)</label>
+                        <div class="file-upload-area" onclick="document.getElementById('medicalCertificate').click()">
+                            <div class="file-upload-icon">🏥</div>
+                            <p>Click to upload or drag and drop</p>
+                            <p><small>PDF, JPG, PNG (max 5MB)</small></p>
+                        </div>
+                        <input type="file" id="medicalCertificate" name="medicalCertificate" accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
+                        <div id="medicalCertificatePreview" class="file-preview"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="transferCertificate">Transfer Certificate (if applicable)</label>
+                        <div class="file-upload-area" onclick="document.getElementById('transferCertificate').click()">
+                            <div class="file-upload-icon">📋</div>
+                            <p>Click to upload or drag and drop</p>
+                            <p><small>PDF, JPG, PNG (max 5MB)</small></p>
+                        </div>
+                        <input type="file" id="transferCertificate" name="transferCertificate" accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
+                        <div id="transferCertificatePreview" class="file-preview"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="otherDocuments">Other Documents</label>
+                        <div class="file-upload-area" onclick="document.getElementById('otherDocuments').click()">
+                            <div class="file-upload-icon">📁</div>
+                            <p>Click to upload or drag and drop</p>
+                            <p><small>PDF, JPG, PNG (max 5MB)</small></p>
+                        </div>
+                        <input type="file" id="otherDocuments" name="otherDocuments" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" multiple>
+                        <div id="otherDocumentsPreview" class="file-preview"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Review and Submit -->
+            <div class="form-step" data-step="4">
+                <div class="step-header">
+                    <h2>Review Your Application</h2>
+                    <p>Please review all information before submitting your application</p>
+                </div>
+                
+                <div class="review-section">
+                    <h3>Student Information</h3>
+                    <div id="studentReview"></div>
+                </div>
+                
+                <div class="review-section">
+                    <h3>Parent/Guardian Information</h3>
+                    <div id="parentReview"></div>
+                </div>
+                
+                <div class="review-section">
+                    <h3>Uploaded Documents</h3>
+                    <div id="documentsReview"></div>
+                </div>
+            </div>
+
+            <!-- Form Navigation -->
+            <div class="form-navigation">
+                <button type="button" id="prevBtn" class="btn btn-secondary" style="display: none;">
+                    <i>←</i> Previous
+                </button>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button type="button" onclick="downloadPDFForm()" class="btn btn-outline" style="background: #f3f4f6; color: #374151; border: 1px solid #d1d5db;">
+                        📄 Download PDF Form
+                    </button>
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button type="button" id="nextBtn" class="btn btn-primary">
+                        Next <i>→</i>
+                    </button>
+                    
+                    <button type="submit" id="submitBtn" class="btn btn-primary" style="display: none;">
+                        <i>✓</i> Submit Application
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="success-icon">✅</div>
+            <h2>Application Submitted Successfully!</h2>
+            <p>Thank you for applying to King Solomon Junior Primary School. We have received your application and will review it shortly.</p>
+            <div class="application-ref">
+                <strong>Application Reference:</strong><br>
+                <span id="applicationRef"></span>
+            </div>
+            <p>You will receive a confirmation email shortly. Our admissions team will contact you within 2-3 business days.</p>
+            <button onclick="closeSuccessModal()" class="btn btn-primary">Close</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/enrollment.js"></script>
+    <script src="js/simple-pdf-generator.js"></script>
+    <script src="js/pdf-generator.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - School Management System</title>
+    <meta name="description" content="Login to School Management System">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 420px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        .login-form {
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100%;
+        }
+        
+        .login-form h1 {
+            margin: 0 0 8px 0;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #374151;
+        }
+        
+        .login-form p {
+            margin: 0 0 30px 0;
+            color: #6b7280;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+            width: 100%;
+            max-width: 320px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            background: #fafafa;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            background: white;
+        }
+        
+        .role-selector {
+            margin-bottom: 24px;
+            width: 100%;
+            max-width: 320px;
+        }
+        
+        .role-selector label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 500;
+            color: #374151;
+            text-align: left;
+        }
+        
+        .role-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .role-option {
+            padding: 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+            background: #fafafa;
+        }
+        
+        .role-option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+            transform: translateY(-2px);
+        }
+        
+        .role-option.active {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .login-btn {
+            width: 100%;
+            max-width: 320px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .login-btn:hover::before {
+            left: 100%;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .forgot-password {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .forgot-password a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .forgot-password a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 12px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error-message {
+            background: #fef2f2;
+            color: #dc2626;
+            padding: 14px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: none;
+            border-left: 4px solid #dc2626;
+            width: 100%;
+            max-width: 320px;
+        }
+        
+        .success-message {
+            background: #f0fdf4;
+            color: #059669;
+            padding: 14px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: none;
+            border-left: 4px solid #059669;
+            width: 100%;
+            max-width: 320px;
+        }
+        
+        
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 10px;
+                border-radius: 20px;
+            }
+            
+            .login-form {
+                padding: 40px 20px;
+            }
+            
+            .login-form h1 {
+                font-size: 1.75rem;
+            }
+            
+            .role-options {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .form-group,
+            .role-selector,
+            .login-btn,
+            .error-message,
+            .success-message {
+                max-width: 100%;
+            }
+        }
+        
+        /* Animation for form elements */
+        .form-group {
+            animation: slideInUp 0.6s ease-out;
+        }
+        
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <h1>Welcome Back</h1>
+            <p>Sign in to your account</p>
+            
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+            
+            <form id="loginForm">
+                <div class="role-selector">
+                    <label>Login As:</label>
+                    <div class="role-options">
+                        <div class="role-option active" data-role="admin">Admin</div>
+                        <div class="role-option" data-role="teacher">Teacher</div>
+                        <div class="role-option" data-role="student">Student</div>
+                        <div class="role-option" data-role="parent">Parent</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required placeholder="Enter your username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                </div>
+                
+                <button type="submit" class="login-btn" id="loginBtn">
+                    Sign In
+                </button>
+                
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Signing you in...</p>
+                </div>
+                
+                <div class="forgot-password">
+                    <a href="#" onclick="showForgotPassword()">Forgot your password?</a>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+
+    <!-- Include SweetAlert2 for better alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        // Role selection
+        document.querySelectorAll('.role-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.role-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Form submission (Static Demo)
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const selectedRole = document.querySelector('.role-option.active').dataset.role;
+            
+            if (!username || !password) {
+                showError('Please enter both username and password');
+                return;
+            }
+            
+            // Show loading state
+            showLoading(true);
+            hideMessages();
+            
+            // Simulate login process (demo mode)
+            setTimeout(() => {
+                showSuccess('Login successful! Redirecting...');
+                
+                // Redirect to appropriate portal based on role
+                setTimeout(() => {
+                    switch(selectedRole) {
+                        case 'student':
+                            window.location.href = 'student-portal.html';
+                            break;
+                        case 'parent':
+                            window.location.href = 'parent-portal.html';
+                            break;
+                        case 'teacher':
+                            window.location.href = 'teacher-portal.html';
+                            break;
+                        case 'admin':
+                            window.location.href = 'admin-portal.html';
+                            break;
+                        default:
+                            window.location.href = 'index.html';
+                    }
+                }, 1000);
+            }, 1500);
+        });
+
+        // Forgot password
+        function showForgotPassword() {
+            Swal.fire({
+                title: 'Forgot Password',
+                html: `
+                    <div style="text-align: left;">
+                        <p>Enter your email address and we'll send you instructions to reset your password.</p>
+                        <input type="email" id="forgotEmail" class="swal2-input" placeholder="Enter your email address">
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Send Reset Link',
+                cancelButtonText: 'Cancel',
+                confirmButtonColor: '#667eea',
+                preConfirm: () => {
+                    const email = document.getElementById('forgotEmail').value;
+                    if (!email) {
+                        Swal.showValidationMessage('Please enter your email address');
+                        return false;
+                    }
+                    return email;
+                }
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        // Demo forgot password (no backend required)
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                        
+                        Swal.fire('Success!', 'Password reset instructions have been sent to your email.', 'success');
+                    } catch (error) {
+                        Swal.fire('Error', error.message || 'Failed to send reset instructions', 'error');
+                    }
+                }
+            });
+        }
+
+        // Utility functions
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+        }
+
+        function hideMessages() {
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+            document.getElementById('loginBtn').style.display = show ? 'none' : 'block';
+        }
+
+
+        // Check if user is already logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.authService.isAuthenticated()) {
+                window.authService.redirectByRole();
+            }
+        });
+    </script>
+</body>
+</html>

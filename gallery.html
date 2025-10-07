@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - King Solomon Junior Primary School</title>
+    <meta name="description" content="Explore the photo gallery of King Solomon Junior Primary School: classrooms, sports, events, and student life.">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/modern-enhancements.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-wZf9j3H7qYtI7m1cYkqgqzYt8o9w0K8o2g8o0s1f9vVfQ2n7Y1rj0mA9u6fXo7g3fS3Lr6cZ0yq9yJZyK2n2w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+</head>
+<body class="gallery-page">
+    <!-- Background Slideshow -->
+    <div class="background-slideshow">
+        <div class="bg-slide active" style="background-image: url('gallery/outdoor/17.jpeg');"></div>
+        <div class="bg-slide" style="background-image: url('gallery/outdoor/18.jpeg');"></div>
+        <div class="bg-slide" style="background-image: url('gallery/outdoor/19.jpeg');"></div>
+        <div class="bg-slide" style="background-image: url('gallery/outdoor/20.jpeg');"></div>
+        <div class="bg-slide" style="background-image: url('gallery/outdoor/21.jpeg');"></div>
+        <div class="bg-slide" style="background-image: url('gallery/outdoor/34.jpeg');"></div>
+        <div class="bg-slide" style="background-image: url('gallery/outdoor/4.jpeg');"></div>
+        <div class="bg-slide" style="background-image: url('gallery/outdoor/93.jpeg');"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="gallery/badge.jpeg" alt="School Badge" class="badge">
+                <span class="school-name">King Solomon Junior</span>
+            </a>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="academics.html" class="nav-link">Academics</a>
+                <a href="admissions.html" class="nav-link">Admissions</a>
+                <a href="news.html" class="nav-link">News & Events</a>
+                <a href="gallery.html" class="nav-link active">Gallery</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>School Gallery</h1>
+            <p>Take a visual journey through our vibrant school community</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section floating-elements">
+        <div class="container">
+            <div class="gallery-filters" style="display:flex; gap:0.75rem; flex-wrap:wrap; justify-content:center; margin-bottom:1rem;">
+                <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-border-all"></i> All</button>
+                <button class="filter-btn" data-filter="classrooms"><i class="fa-solid fa-chalkboard"></i> Classrooms</button>
+                <button class="filter-btn" data-filter="sports"><i class="fa-solid fa-basketball"></i> Sports</button>
+                <button class="filter-btn" data-filter="events"><i class="fa-solid fa-people-group"></i> Events</button>
+                <button class="filter-btn" data-filter="students"><i class="fa-solid fa-users"></i> Students</button>
+            </div>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/logo.svg" alt="King Solomon Junior Primary School Logo" class="footer-logo-img">
+                        <h3>King Solomon Junior Primary School</h3>
+                    </div>
+                    <p>Providing quality education and nurturing young minds in Homa Bay, Kenya.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">📘</a>
+                        <a href="#" class="social-link" aria-label="Twitter">🐦</a>
+                        <a href="#" class="social-link" aria-label="Instagram">📷</a>
+                        <a href="#" class="social-link" aria-label="YouTube">📺</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="academics.html">Academics</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                        <li><a href="news.html">News & Events</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p>📍 Township, Asego, Homa Bay</p>
+                        <p>📞 +254 XXX XXX XXX</p>
+                        <p>✉️ info@kingsolomonjunior.co.ke</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>School Hours</h4>
+                    <div class="school-hours">
+                        <p>Monday - Friday: 7:30 AM - 4:00 PM</p>
+                        <p>Saturday: 8:00 AM - 12:00 PM</p>
+                        <p>Sunday: Closed</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 King Solomon Junior Primary School. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+    // Build gallery from /gallery folder files (1.jpeg..n.jpeg)
+    document.addEventListener('DOMContentLoaded', function() {
+        const grid = document.getElementById('galleryGrid');
+        if (!grid) return;
+        // Known files detected in project (1..52)
+        const count = 52; // adjust if more files are added
+        const items = [];
+        for (let i = 1; i <= count; i++) {
+            const src = `gallery/${i}.jpeg`;
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.setAttribute('data-category', 'all');
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `Gallery photo ${i}`;
+            item.appendChild(img);
+            const overlay = document.createElement('div');
+            overlay.className = 'gallery-overlay';
+            overlay.innerHTML = `<h3>School Moment</h3><p>Photo ${i}</p>`;
+            item.appendChild(overlay);
+            // Click to lightbox
+            item.addEventListener('click', () => openLightbox(src));
+            items.push(item);
+        }
+        items.forEach(el => grid.appendChild(el));
+
+        // Lightbox setup
+        let lightbox = document.querySelector('.lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.className = 'lightbox';
+            lightbox.innerHTML = `<button class="lightbox-close" aria-label="Close">&times;</button><img alt="Expanded image">`;
+            document.body.appendChild(lightbox);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
+                    lightbox.classList.remove('open');
+                }
+            });
+        }
+        window.openLightbox = function(src) {
+            const img = lightbox.querySelector('img');
+            img.src = src;
+            lightbox.classList.add('open');
+        }
+    });
+    </script>
+</body>
+<\html>
+
+
